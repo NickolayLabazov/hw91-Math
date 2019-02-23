@@ -4,17 +4,25 @@ class Magdaem {
     this.health = 100;
     this.attackDist = 0;
     this.dope = false;
+    this.distance = 0;
   }
 
   set attack(distance) {
-    this.attackDist = this.attackMax - 0.1 * (distance - 1) * this.attackMax;
-    if (this.dope) {
-      this.attackDist = this.attackDist - 5 * Math.log(distance) / Math.log(2);
-    }
+    this.distance = distance;
   }
 
-  get stoned() {
-    this.dope = true;
+  get attack() {
+    this.attackDist = this.attackMax - 0.1 * (this.distance - 1) * this.attackMax;
+    if (this.dope) {
+      this.attackDist = this.attackDist - 5 * Math.log(this.distance) / Math.log(2);
+    }
+    return this.attackDist;
+  }
+
+  set stoned(value) {
+    if (value === 'stoned') {
+      this.dope = true;
+    }
   }
 }
 
